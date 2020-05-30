@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-12">
+        <app-nav-bar></app-nav-bar>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 margin-top-30px" >
+            <app-master-search
+            [data]="masterInputType"></app-master-search>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12 margin-top-30px" >
+            <app-master-count
+            [data]="masterCategory"></app-master-count>
+        </div>
+        <div class="col-md-6 col-xs-12 margin-top-30px" >
+            <!-- <app-master-count
+            [data]="masterCategory"></app-master-count> -->
+        </div>
+    </div>
+</div>
