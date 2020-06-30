@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ostore-f0243"
+  },
+  "targets": {
+    "ostore-f0243": {
+      "hosting": {
+        "ostore": [
+          "ostore-f0243"
+        ]
+      }
+    }
+  }
+}

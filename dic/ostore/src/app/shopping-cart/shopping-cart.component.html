@@ -1,0 +1,51 @@
+<div>
+    <h3>Shopping Cart</h3>
+
+<p *ngIf="shoppingCart">
+    You have {{shoppingCart.totalItemsCount}} in list
+    <button class="btn btn-light" (click)="clearCart()" *ngIf="shoppingCart && shoppingCart.totalItemsCount">
+        Clear from Cart
+    </button>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th class="text-center" style="width:300px">Quantity</th>
+            <th class="text-right" style="width:200px">Price</th>
+        </tr>
+    </thead>
+    <thead *ngIf="shoppingCart">
+        <tr *ngFor="let item of shoppingCart.items">
+            <td>
+                <div [style.backgroundImage]="'url('+item.product.imageUrl+')'" class="thumbnail"></div>
+            </td>
+            <td>{{item.product.title | titlecase}}</td>
+            <td ><app-product-cart-button
+                [product]="item.product"
+                [shoppingCart]="shoppingCart"
+                (removeItem)="removeItemFromCart(item.product)"
+                (addItem)="addItemToCart(item.product)"
+            ></app-product-cart-button></td>
+            <td class="text-right">{{item.totalPrice | currency:"USD":true}}</td>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th colspan="2">Total</th>
+            <th class="text-right" *ngIf="shoppingCart">{{shoppingCart.totalAmount | currency:"USD":true}}</th>
+        </tr>
+    </tfoot>
+</table>
+
+<a class="btn btn-primary" 
+    *ngIf="shoppingCart && shoppingCart.totalItemsCount"
+    [routerLink]="['/check-out']" 
+>
+    Go to Cart
+</a>
+
+</div>

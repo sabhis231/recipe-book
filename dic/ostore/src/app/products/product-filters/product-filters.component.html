@@ -1,0 +1,18 @@
+<div class="sticky-top">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action"
+            [class.active]="!selectedCatgeory"
+            [routerLink]="['/']"     
+        >
+            All Category
+        </a>
+        <a class="list-group-item list-group-item-action" 
+            *ngFor="let category of categories"
+            [routerLink]="['/']" 
+            [queryParams]="{category:category.key}" 
+            [routerLinkActive]="'active'"
+        >
+            {{ category.name | titlecase }}
+        </a>
+    </div>
+</div>

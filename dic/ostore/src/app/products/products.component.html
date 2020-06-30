@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-3">
+        <app-product-filters
+            [categories]="categories"
+            [selectedCatgeory]="selectedCatgeory"
+        ></app-product-filters>
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <ng-container *ngFor="let product of filterProducts; let i = index">
+                <div class="col">
+                    <app-product-card 
+                        [product]="product"
+                        [shoppingCart]="cart"
+                        (removeItem)="removeItemFromCart(product)"
+                        (addItem)="addItemToCart(product)"
+                    ></app-product-card>
+                </div>
+                <div class="w-100" *ngIf="(i+1)%2===0"> </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

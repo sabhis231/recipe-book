@@ -1,0 +1,10 @@
+import { Catgeory } from 'shared/model/Category.model';
+export interface Product {
+
+    title:string;
+    price:number;
+    imageUrl:string;
+    category:string;
+    key:string;
+
+}

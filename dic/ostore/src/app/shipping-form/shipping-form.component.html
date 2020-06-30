@@ -1,0 +1,29 @@
+<form #checkOut="ngForm" (ngSubmit)="saveCheckOut(checkOut.value)">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input ngModel name="name" #name="ngModel" class="form-control" type="text" placeholder="Name" required/>
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+            <span>Name is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Name">Address</label>
+        <input ngModel name="line1" #line1="ngModel" class="form-control" type="text" placeholder="Address Line 1" required/>
+        <div class="alert alert-danger" *ngIf="line1.touched && line1.invalid">
+            <span>Address is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <input ngModel name="line 2" #line2="ngModel" class="form-control" type="text" placeholder="Address Line 2"/>
+    </div>
+    <div class="form-group">
+        <label for="Name">City</label>
+        <input ngModel name="city" #city="ngModel" class="form-control" type="text" placeholder="City" required/>
+        <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+            <span>City is Mandatory</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="checkOut.invalid">Place Order</button>
+    </div>
+</form> 
