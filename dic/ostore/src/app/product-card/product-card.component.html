@@ -1,23 +1,33 @@
 <div class="card">
-    <div [style.backgroundImage]="'url('+product.imageUrl+')'" class="card-img"></div>
-    <!-- <img [src]="product.imageUrl" class="card-img-top" *ngIf="product.imageUrl"> -->
-    <div class="card-body">
-        <h5 class="card-title" *ngIf="product.title || product.category">
-            {{ product.title | titlecase }} - ({{ product.category | titlecase}})
-        </h5>
-        <p class="card-text"> {{ product.price | currency:'USD':true}} </p>
-    </div>
-    <div class="card-footer" *ngIf="showAction && shoppingCart">
-        <button *ngIf="shoppingCart.getQuantity(product)==0; else updateQuantity" class="btn btn-secondary btn-block" (click)="addToCart()">
-            Add to Cart
-        </button>
-        <ng-template #updateQuantity>
-            <app-product-cart-button
-                [product]="product"
-                [shoppingCart]="shoppingCart"
-                (removeItem)="removeFromCart()"
-                (addItem)="addToCart()"
-            ></app-product-cart-button>
-        </ng-template>
-    </div>
+  <!-- <div [style.backgroundImage]="'url('+product.imageUrl+')'" class="card-img"></div> -->
+  <div class="img-wrapper">
+    <img
+      [src]="product.imageUrl"
+      class="card-img-top img-thumbnail"
+      *ngIf="product.imageUrl"
+    />
+  </div>
+  <div class="card-body">
+    <h5 class="card-title" *ngIf="product.title || product.category">
+      {{ product.title | titlecase }} - ({{ product.category | titlecase }})
+    </h5>
+    <p class="card-text">{{ product.price | currency: "USD":true }}</p>
+  </div>
+  <div class="card-footer" *ngIf="showAction && shoppingCart">
+    <button
+      *ngIf="shoppingCart.getQuantity(product) == 0; else updateQuantity"
+      class="btn btn-secondary btn-block"
+      (click)="addToCart()"
+    >
+      Add to Cart
+    </button>
+    <ng-template #updateQuantity>
+      <app-product-cart-button
+        [product]="product"
+        [shoppingCart]="shoppingCart"
+        (removeItem)="removeFromCart()"
+        (addItem)="addToCart()"
+      ></app-product-cart-button>
+    </ng-template>
+  </div>
 </div>

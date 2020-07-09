@@ -4,7 +4,26 @@
 .card {
     margin:20px;
 }
-.card-img {
-    background-size: cover;
-    height: 100px;
-}
+// .card-img {
+//     background-size: cover;
+//     height: 100px;
+// }
+// img {
+//     width: auto;
+//     height: 100px;
+// }
+
+
+.img-wrapper {
+    position: relative;
+    padding-bottom: 60%;
+    overflow: hidden;
+    width: 100%;
+  }
+  .img-wrapper img {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
