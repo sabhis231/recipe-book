@@ -4,7 +4,7 @@ export class User {
         public emailId: string, 
         private _idToken: string, 
         public refreshToken: string, 
-        // private _expireIn: Date,
+        private _expireIn: Date,
         public localId?: string) {
     }
 

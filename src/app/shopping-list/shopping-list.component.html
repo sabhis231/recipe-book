@@ -1,1 +1,17 @@
-<p>shopping-list works!</p>
+<app-shopping-list-edit
+  (shoppingData)="onSubmitData($event)"
+></app-shopping-list-edit>
+<hr />
+<div class="text-center">
+  <app-spinner-loader
+    [message]="'Loading Latest Data from Server'"
+    *ngIf="isLoading"
+  ></app-spinner-loader>
+</div>
+
+<app-shopping-list-detail
+  [shoppingList]="shoppingList"
+  [newData]="newData"
+  [newItemLoading]="newItemLoading"
+  (loadData)="onLoadData($event)"
+></app-shopping-list-detail>

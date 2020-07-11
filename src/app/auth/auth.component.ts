@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.authSandbox.getLoading().subscribe((loadingData) => {
+    this.subscription=this.authSandbox.getLoading().subscribe((loadingData) => {
       this.isLoading = loadingData;
     });
 

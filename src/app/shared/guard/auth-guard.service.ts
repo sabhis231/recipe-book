@@ -7,6 +7,7 @@ import {
   Router,
   RouterStateSnapshot,
   UrlTree,
+  NavigationEnd,
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -35,8 +36,10 @@ export class AuthGuard implements CanActivate {
     return this.authSandbox.getUser().pipe(
       take(1),
       map((userData: User) => {
-        console.log("authGraud",userData);
+        console.log(state.url);
+        localStorage.setItem('recipe-url', state.url);
         if (userData) {
+          // console.log(!!userData);
           return !!userData;
         } else {
           return this.router.createUrlTree(['/auth'], {

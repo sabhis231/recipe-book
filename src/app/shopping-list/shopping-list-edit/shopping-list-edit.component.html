@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-12">
+    <span class="help">
+      Please enter the details...
+    </span>
+    <form
+      class="form-inline"
+      [formGroup]="shoppingList"
+      (ngSubmit)="onSubmit()"
+    >
+      <input
+        type="text"
+        class="form-control mb-2 mr-sm-2"
+        placeholder="Enter Item Name"
+        formControlName="item"
+      />
+      <input
+        type="number"
+        class="form-control mb-2 mr-sm-2"
+        placeholder="Enter amount"
+        formControlName="amount"
+      />
+      <button
+        type="submit"
+        class="btn btn-primary mb-2"
+        [disabled]="!shoppingList.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

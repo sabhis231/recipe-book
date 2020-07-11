@@ -1,12 +1,12 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import * as authAction from '../actions/auth.actions';
 import { User } from './../../../shared/model/user.model';
 import { AuthAPIService } from './../../service/auth.api.service';
-import { Actions, ofType, Effect } from '@ngrx/effects';
-import * as authAction from '../actions/auth.actions';
-import { switchMap, map, catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffects {
@@ -24,10 +24,18 @@ export class AuthEffects {
       return this.authAPIService
         .doAuth(authData.payload.email, authData.payload.password)
         .pipe(
-          map((userData: User) => {
+          map((userData) => {
             console.log(userData);
             localStorage.setItem('recipe-userData', JSON.stringify(userData));
-            return new authAction.LoginDone(userData);
+
+            const user = new User(
+              userData.email,
+              userData.idToken,
+              userData.refreshToken,
+              new Date(new Date().getTime() + userData.expiresIn),
+              userData.localId
+            );
+            return new authAction.LoginDone(user);
           }),
           catchError((error) => {
             console.log(error);
@@ -42,22 +50,23 @@ export class AuthEffects {
     ofType(authAction.AUTO_LOGIN),
     map(() => {
       let localData = localStorage.getItem('recipe-userData');
-      if (!localData)
-      return new authAction.AutoLoginFail();
+      if (!localData) return new authAction.AutoLoginFail();
 
       let loadUser: {
-        emailId: string;
-        _idToken: string;
+        email: string;
+        idToken: string;
         refreshToken: string;
         localId: string;
+        expiresIn: string;
       } = JSON.parse(localData);
       const user = new User(
-        loadUser.emailId,
-        loadUser._idToken,
+        loadUser.email,
+        loadUser.idToken,
         loadUser.refreshToken,
+        new Date(new Date().getTime() + loadUser.expiresIn),
         loadUser.localId
       );
-      
+
       return new authAction.LoginDone(user);
     })
   );
@@ -66,9 +75,9 @@ export class AuthEffects {
   authSuccess = this.action$.pipe(
     ofType(authAction.LOGIN_DONE),
     tap(() => {
-      console.log('loginn effect');
+      let lastPage = localStorage.getItem('recipe-url');
       let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-      this.router.navigate([returnUrl ? returnUrl : '/']);
+      this.router.navigate([returnUrl ? returnUrl : lastPage ? lastPage : '/']);
     })
   );
 
@@ -77,6 +86,7 @@ export class AuthEffects {
     ofType(authAction.LOGOUT),
     tap(() => {
       localStorage.removeItem('recipe-userData');
+      localStorage.removeItem('recipe-url');
       this.router.navigate(['/auth']);
     })
   );

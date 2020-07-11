@@ -35,6 +35,7 @@ export class AuthSandbox {
   getUser() {
     return this.getUserState().pipe(
       map((userState) => {
+          console.log("UserState ",userState);
         return userState.user;
       })
     );

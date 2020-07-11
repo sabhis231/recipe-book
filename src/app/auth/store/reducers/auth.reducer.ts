@@ -1,14 +1,13 @@
-import { LOGIN_FAIL } from './../actions/auth.actions';
 import { User } from './../../../shared/model/user.model';
 import * as authAction from '../actions/auth.actions';
 
-export interface AuthState {
+export interface State {
   user: User;
   isLoading: boolean;
   error: string;
 }
 
-export const initialState: AuthState = {
+const initialState: State = {
   user: null,
   isLoading: false,
   error: null,

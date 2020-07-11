@@ -19,7 +19,10 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
 import { RecipeComponent } from './recipe/recipe.component';
 import { SpinnerLoaderComponent } from './shared/component/spinner-loader/spinner-loader.component';
 import { AuthInterceptorService } from './shared/interceptor/auth-interceptor.service';
+import { ShoppingListDetailComponent } from './shopping-list/shopping-list-detail/shopping-list-detail.component';
+import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingListEffects } from './shopping-list/store/effects/shopping-list.effect';
 import { appReducer } from './store/reducers/app.reducer';
 
 @NgModule({
@@ -33,6 +36,8 @@ import { appReducer } from './store/reducers/app.reducer';
     RecipeListComponent,
     RecipeDetailsComponent,
     RecipeAddComponent,
+    ShoppingListDetailComponent,
+    ShoppingListEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,7 @@ import { appReducer } from './store/reducers/app.reducer';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ShoppingListEffects]),
     MatCardModule,
     MatExpansionModule,
     MatGridListModule,

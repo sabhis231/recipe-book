@@ -1,0 +1,39 @@
+<div class="row">
+  <div
+    class="col-md-3"
+    *ngFor="let shoppingData of shoppingList"
+    (click)="onClick(shoppingData)"
+  >
+    <div class="card mb-2">
+      <div class="row no-gutters">
+        <div class="col-md-9">
+          <div class="card-body">
+            <p class="card-title">{{ shoppingData.item }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Amount: {{ shoppingData.amount }}</small
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3" *ngIf="newItemLoading">
+    <div class="card mb-2">
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-title">{{ newData.item }}</p>
+            <p class="card-text">
+              <small class="text-muted">Amount: {{ newData.amount }}</small>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <app-spinner-loader></app-spinner-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
