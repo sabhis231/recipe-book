@@ -25,7 +25,7 @@ export class AuthEffects {
         .doAuth(authData.payload.email, authData.payload.password)
         .pipe(
           map((userData) => {
-            console.log(userData);
+            //console.log(userData);
             localStorage.setItem('recipe-userData', JSON.stringify(userData));
 
             const user = new User(
@@ -38,7 +38,7 @@ export class AuthEffects {
             return new authAction.LoginDone(user);
           }),
           catchError((error) => {
-            console.log(error);
+            //console.log(error);
             return this.errorHandelar(error);
           })
         );

@@ -39,20 +39,31 @@ export class ShoppingListSandbox {
       })
     );
   }
-  startEditing(shoppingListData: ShoppingList) {
+  startEditing(shoppingListData: ShoppingList, index: number) {
     this.store.dispatch(
-      new shoppingListAction.StartEditingShoppingLists(shoppingListData)
+      new shoppingListAction.StartEditingShoppingLists({
+        shoppingListData: shoppingListData,
+        index: index,
+      })
+    );
+  }
+  deleteData(shoppingListData: ShoppingList, index: number) {
+    this.store.dispatch(
+      new shoppingListAction.DeleteShoppingListData({
+        shoppingListData: shoppingListData,
+        index: index,
+      })
     );
   }
 
   storeShoppingList(shoppingListData: ShoppingList) {
-    console.log(shoppingListData);
+    //console.log(shoppingListData);
     return this.store.dispatch(
       new shoppingListAction.SaveShoppingList(shoppingListData)
     );
   }
   updateShoppingList(shoppingListData: ShoppingList) {
-    console.log(shoppingListData);
+    //console.log(shoppingListData);
     return this.store.dispatch(
       new shoppingListAction.UpdateShoppingList(shoppingListData)
     );

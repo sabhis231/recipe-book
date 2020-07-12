@@ -1,9 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,6 +22,7 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListEffects } from './shopping-list/store/effects/shopping-list.effect';
 import { appReducer } from './store/reducers/app.reducer';
+import { SnackBarComponent } from './shared/component/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +37,7 @@ import { appReducer } from './store/reducers/app.reducer';
     RecipeAddComponent,
     ShoppingListDetailComponent,
     ShoppingListEditComponent,
+    SnackBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +48,7 @@ import { appReducer } from './store/reducers/app.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([AuthEffects, ShoppingListEffects]),
-    MatCardModule,
-    MatExpansionModule,
-    MatGridListModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

@@ -1,14 +1,13 @@
 <div class="row">
   <div
-    class="col-md-3"
-    *ngFor="let shoppingData of shoppingList"
-    (click)="onClick(shoppingData)"
+    class="col-md-3 click-cursor"
+    *ngFor="let shoppingData of shoppingList; let i = index"
   >
     <div class="card mb-2">
       <div class="row no-gutters">
         <div class="col-md-9">
           <div class="card-body">
-            <p class="card-title">{{ shoppingData.item }}</p>
+            <p class="card-title">{{ shoppingData.item | titlecase }}</p>
             <p class="card-text">
               <small class="text-muted"
                 >Amount: {{ shoppingData.amount }}</small
@@ -16,10 +15,23 @@
             </p>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="row no-gutters">
+            <div class="col-md-12">
+              <div class="card-body">
+                <i class="fa fa-pencil-square-o fa-2x" (click)="onClick(shoppingData, i)"></i>
+                <i class="fa fa-trash fa-2x" (click)="onRemove(shoppingData, i)"></i>
+              </div>
+            </div>
+            <!-- <div class="col-md-12">
+              Del
+            </div> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-3" *ngIf="newItemLoading">
+  <div class="col-md-3 noclick-cursor" *ngIf="newItemLoading">
     <div class="card mb-2">
       <div class="row no-gutters">
         <div class="col-md-8">

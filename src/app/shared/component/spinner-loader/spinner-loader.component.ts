@@ -11,6 +11,6 @@ export class SpinnerLoaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.message);
+    //console.log(this.message);
   }
 }

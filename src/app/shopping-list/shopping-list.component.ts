@@ -19,27 +19,31 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   errorMessage: string = null;
   // isNewAddedCompleted: boolean = true;
   newData: ShoppingList;
+  loadData: ShoppingList;
   newItemLoading: boolean = false;
   isEditing: boolean = false;
+  isSuccess: string = null;
 
   ngOnInit() {
     this.subscription = this.shoppingListService
       .fetchAllShoppingList()
       .subscribe((slState) => {
+        //console.log("*************************", slState);
         this.errorMessage = slState.errorMessage;
         this.isLoading = slState.isLoading;
-        console.log(slState.shoppingList);
         this.shoppingList = slState.shoppingList;
-        this.newData = slState.editShoppingData;
+        this.loadData = slState.editShoppingData;
         this.isEditing = slState.isEditing;
         this.newItemLoading = slState.newItemLoading;
+        this.isSuccess=slState.isSuccess;
       });
   }
   onSubmitData(eventData) {
-    console.log(this.isEditing);
-    console.log(eventData);
+    this.newData = eventData;
+    //console.log(this.isEditing);
+    //console.log(eventData);
     if (this.isEditing) {
-      eventData['id'] = this.newData.id;
+      eventData['id'] = this.loadData.id;
       this.shoppingListService.updateShoppingList(eventData);
     } else {
       this.newData = eventData;
@@ -48,8 +52,18 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onLoadData(eventData) {
-    console.log(eventData);
-    this.shoppingListService.startEditing(eventData);
+    //console.log(eventData);
+    this.shoppingListService.startEditing(
+      eventData['shoppingList'],
+      eventData['index']
+    );
+  }
+  onDeleteData(eventData) {
+    //console.log(eventData);
+    this.shoppingListService.deleteData(
+      eventData['shoppingList'],
+      eventData['index']
+    );
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShoppingList } from 'src/app/shared/model/shopping-list.model';
 import { ShoppingListService } from './../service/shopping-list.service';
@@ -19,7 +19,7 @@ export class ShoppingListEditComponent implements OnInit {
     this.shoppingListService
       .fetchAllShoppingList()
       .subscribe((shoppingData) => {
-        console.log(shoppingData.editShoppingData);
+        //console.log(shoppingData.editShoppingData);
         let shoppingdata = shoppingData.editShoppingData;
         if (shoppingData.isEditing)
           this.shoppingList.setValue({
@@ -33,7 +33,11 @@ export class ShoppingListEditComponent implements OnInit {
     });
   }
 
+  onclear() {
+    this.shoppingList.reset();
+  }
   onSubmit() {
     this.shoppingData.emit(this.shoppingList.value);
+    this.onclear();
   }
 }

@@ -1,0 +1,13 @@
+::ng-deep .notif-success {
+  color: #155724 !important;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+}
+::ng-deep .notif-error {
+  color: #572d15 !important;
+  background-color: #f1c7ae !important;
+  border-color: #f1c7ae !important;
+}
+::ng-deep .mat-simple-snackbar-action {
+  color: red;
+}

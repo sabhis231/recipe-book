@@ -21,7 +21,7 @@ export class ShoppingListEffects {
         .saveShoppingList(shoppingListData.payload)
         .pipe(
           map((responsedata) => {
-            console.log(responsedata['name']);
+            //console.log(responsedata['name']);
             return new shoppingListAction.SaveShoppingListSuccess({
               message: '',
               id: responsedata['name'],
@@ -32,9 +32,9 @@ export class ShoppingListEffects {
             });
           }),
           catchError((error) => {
-            console.log(error);
+            //console.log(error);
             return of(
-              new shoppingListAction.SaveShoppingListError('error occured')
+              new shoppingListAction.SaveShoppingListError('Error while Save!')
             );
           })
         );
@@ -51,8 +51,8 @@ export class ShoppingListEffects {
           return new shoppingListAction.LoadShoppingList(shoppingData);
         }),
         catchError((error) => {
-          console.log(error);
-          return of(new shoppingListAction.LoadShoppingListError('error'));
+          //console.log(error);
+          return of(new shoppingListAction.LoadShoppingListError('Error while Fetch!'));
         })
       );
     })
@@ -66,16 +66,35 @@ export class ShoppingListEffects {
         .updateShoppingList(shoppingData.payload)
         .pipe(
           map((resData) => {
-            console.log('response', resData);
+            //console.log('response', resData as ShoppingList);
             //   let shoppingData = this.getAllShoppingListFromShoppingObject(resData);
             let shoppingList: ShoppingList = null;
             return new shoppingListAction.StopEditingShoppingLists(
-              shoppingList
+              resData as ShoppingList
             );
           }),
           catchError((error) => {
-            console.log(error);
-            return of(new shoppingListAction.LoadShoppingListError('error'));
+            //console.log(error);
+            return of(new shoppingListAction.LoadShoppingListError('Error while Edit|'));
+          })
+        );
+    })
+  );
+
+  @Effect()
+  deleteShoppingListData = this.action$.pipe(
+    ofType(shoppingListAction.DELETE_SHOPPING_LIST_DATA),
+    switchMap((shoppingListData: shoppingListAction.DeleteShoppingListData) => {
+      return this.shoppingListAPIService
+        .deleteShoppingListData(shoppingListData.payload.shoppingListData)
+        .pipe(
+          map((resData) => {
+            return new shoppingListAction.DeleteShoppingListDataSuccess(
+              shoppingListData.payload.shoppingListData
+            );
+          }),
+          catchError((error) => {
+            return of(new shoppingListAction.LoadShoppingListError('Error while Delete!'));
           })
         );
     })
@@ -87,7 +106,7 @@ export class ShoppingListEffects {
     objects.forEach(function (id) {
       shoppingList.push({ ...shoppingListObject[id], id });
     });
-    console.log(shoppingList);
+    //console.log(shoppingList);
     return shoppingList;
   }
   private getAllObject(object) {

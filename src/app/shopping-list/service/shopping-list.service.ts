@@ -15,16 +15,19 @@ export class ShoppingListService {
   }
 
   storeShoppingList(shoppingListData: ShoppingList) {
-    console.log("storeShoppingList")
+    //console.log("storeShoppingList")
     return this.shoppingListSandbox.storeShoppingList(shoppingListData);
   }
   updateShoppingList(shoppingListData: ShoppingList) {
-      console.log("Updatedata")
+      //console.log("Updatedata")
     return this.shoppingListSandbox.updateShoppingList(shoppingListData);
   }
 
-  startEditing(shoppingListData: ShoppingList) {
-      return this.shoppingListSandbox.startEditing(shoppingListData);
+  startEditing(shoppingListData: ShoppingList, index:number) {
+      return this.shoppingListSandbox.startEditing(shoppingListData, index);
+  }
+  deleteData(shoppingListData: ShoppingList, index:number) {
+      return this.shoppingListSandbox.deleteData(shoppingListData, index);
   }
 
   getShoppingList() {

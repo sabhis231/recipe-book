@@ -1,5 +1,3 @@
-import { User } from './../model/user.model';
-import { AuthSandbox } from './../../auth/sandbox/auth.sandbox.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -7,23 +5,17 @@ import {
   Router,
   RouterStateSnapshot,
   UrlTree,
-  NavigationEnd,
 } from '@angular/router';
-
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-
-import { AuthService } from './../../auth/service/auth.service';
+import { AuthSandbox } from './../../auth/sandbox/auth.sandbox.service';
+import { User } from './../model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private authSandbox: AuthSandbox
-  ) {}
+  constructor(private router: Router, private authSandbox: AuthSandbox) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -36,10 +28,8 @@ export class AuthGuard implements CanActivate {
     return this.authSandbox.getUser().pipe(
       take(1),
       map((userData: User) => {
-        console.log(state.url);
         localStorage.setItem('recipe-url', state.url);
         if (userData) {
-          // console.log(!!userData);
           return !!userData;
         } else {
           return this.router.createUrlTree(['/auth'], {

@@ -2,6 +2,7 @@
   (shoppingData)="onSubmitData($event)"
 ></app-shopping-list-edit>
 <hr />
+{{ errorMessage }}
 <div class="text-center">
   <app-spinner-loader
     [message]="'Loading Latest Data from Server'"
@@ -14,4 +15,10 @@
   [newData]="newData"
   [newItemLoading]="newItemLoading"
   (loadData)="onLoadData($event)"
+  (removeData)="onDeleteData($event)"
 ></app-shopping-list-detail>
+<app-snack-bar
+  *ngIf="errorMessage || isSuccess"
+  [isError]="errorMessage ? true : false"
+  [message]="(errorMessage ? errorMessage : isSuccess) | titlecase"
+></app-snack-bar>

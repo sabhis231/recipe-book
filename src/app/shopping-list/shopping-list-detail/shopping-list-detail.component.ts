@@ -11,16 +11,24 @@ export class ShoppingListDetailComponent implements OnInit {
   // @Input('isNewAddedCompleted') isNewAddedCompleted?: boolean;
   @Input('newItemLoading') newItemLoading?: boolean;
   @Input('newData') newData?: { item: string; amount: string };
-  @Output('loadData') loadData: EventEmitter<ShoppingList> = new EventEmitter<
-    ShoppingList
-  >();
+  @Output('loadData') loadData: EventEmitter<{
+    shoppingList: ShoppingList;
+    index: number;
+  }> = new EventEmitter<{ shoppingList: ShoppingList; index: number }>();
+  @Output('removeData') removeData: EventEmitter<{
+    shoppingList: ShoppingList;
+    index: number;
+  }> = new EventEmitter<{ shoppingList: ShoppingList; index: number }>();
 
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.shoppingList);
+    //console.log(this.shoppingList);
   }
-  onClick(event) {
-    this.loadData.emit(event);
+  onClick(listData, index) {
+    this.loadData.emit({ shoppingList: listData, index: index });
+  }
+  onRemove(listData, index) {
+    this.removeData.emit({ shoppingList: listData, index: index });
   }
 }
