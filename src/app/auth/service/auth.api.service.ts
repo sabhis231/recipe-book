@@ -21,7 +21,8 @@ export class AuthAPIService {
   signInApi: string = signInApi + this.authKey;
 
   doAuth(email: string, password: string) {
-    if (this.authKey) console.log('Please enter Valid Firebase Auth key');
+    if (!this.authKey) console.log('Please enter Valid Firebase Auth key');
+
     return this.http.post<AuthData>(this.signInApi, {
       email: email,
       password: password,

@@ -10,7 +10,7 @@ import { AuthService } from './service/auth.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   isLoading: boolean = false;
   error: string;
@@ -21,13 +21,17 @@ export class AuthComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription=this.authSandbox.getLoading().subscribe((loadingData) => {
-      this.isLoading = loadingData;
-    });
+    this.subscription.push(
+      this.authSandbox.getLoading().subscribe((loadingData) => {
+        this.isLoading = loadingData;
+      })
+    );
 
-    this.authSandbox.getError().subscribe((errorData) => {
-      this.error = errorData;
-    });
+    this.subscription.push(
+      this.authSandbox.getError().subscribe((errorData) => {
+        this.error = errorData;
+      })
+    );
   }
 
   onSubmit(loginForm: NgForm) {
@@ -35,6 +39,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.subscription) this.subscription.unsubscribe();
+    this.subscription.forEach((s) => s.unsubscribe());
+    // if (this.subscription) this.subscription.unsubscribe();
   }
 }

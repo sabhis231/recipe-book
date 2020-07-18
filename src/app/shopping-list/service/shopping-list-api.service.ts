@@ -18,13 +18,13 @@ export class ShoppingListAPIService {
 
   updateShoppingList(shoppingListData: ShoppingList) {
     return this.http.patch(
-      staticLink.shoppingListAPIBaseUrl + shoppingListData.id + '.json',
+      staticLink.shoppingListAPIBaseUrl + '/' + shoppingListData.id + '.json',
       shoppingListData
     );
   }
   deleteShoppingListData(shoppingListData: ShoppingList) {
     return this.http.delete(
-      staticLink.shoppingListAPIBaseUrl + shoppingListData.id + '.json'
+      staticLink.shoppingListAPIBaseUrl + '/' + shoppingListData.id + '.json'
     );
   }
 

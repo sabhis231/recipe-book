@@ -27,7 +27,7 @@ const initialState: State = {
   isSuccess: null,
 };
 
-export function ShoppingListReducer(
+export function shoppingListReducer(
   state = initialState,
   action: shoppingListAction.ShoppingListActionType
 ) {

@@ -1,3 +1,4 @@
+import { RecipeEffects } from './recipe/store/effects/recipe.effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -47,7 +48,7 @@ import { SnackBarComponent } from './shared/component/snack-bar/snack-bar.compon
     BrowserAnimationsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([AuthEffects, ShoppingListEffects]),
+    EffectsModule.forRoot([AuthEffects, ShoppingListEffects, RecipeEffects]),
     MatSnackBarModule,
   ],
   providers: [

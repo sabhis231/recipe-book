@@ -1,3 +1,4 @@
+import { RecipeAddComponent } from './recipe/recipe-add/recipe-add.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
@@ -14,6 +15,8 @@ const routes: Routes = [
   },
   { path: 'auth', component: AuthComponent },
   { path: 'recipe', component: RecipeComponent, canActivate: [AuthGuard] },
+  { path: 'recipe/new', component: RecipeAddComponent, canActivate: [AuthGuard] },
+  { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuard] },
   { path: '**', component: RecipeComponent, canActivate: [AuthGuard] },
 ];
 

@@ -75,6 +75,7 @@ export class AuthEffects {
   authSuccess = this.action$.pipe(
     ofType(authAction.LOGIN_DONE),
     tap(() => {
+      // let lastPage = localStorage.getItem('recipe-url');
       let lastPage = localStorage.getItem('recipe-url');
       let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
       this.router.navigate([returnUrl ? returnUrl : lastPage ? lastPage : '/']);

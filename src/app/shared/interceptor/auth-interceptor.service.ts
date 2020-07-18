@@ -4,6 +4,7 @@ import {
   HttpInterceptor,
   HttpParams,
   HttpRequest,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { exhaustMap, take } from 'rxjs/operators';
@@ -21,13 +22,17 @@ export class AuthInterceptorService implements HttpInterceptor {
     return this.authSandbox.getUser().pipe(
       take(1),
       exhaustMap((userData: User) => {
+        //console.log(userData);
+
         if (!userData) {
           return next.handle(req);
         }
-        //console.log(userData);
         //console.log(userData.token);
         const modifiedReq = req.clone({
           params: new HttpParams().set('auth', userData.token),
+          headers: new HttpHeaders({
+            customer: "someThing"
+          })
         });
         return next.handle(modifiedReq);
       })

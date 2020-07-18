@@ -7,6 +7,11 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private authSandbox: AuthSandbox) {}
 
+
+  getUser() {
+    return this.authSandbox.getUser();
+  }
+
   autoLogin() {
     this.authSandbox.autoLogin();
   }

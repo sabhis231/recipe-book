@@ -1,17 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <button class="btn btn-success">New Recipe</button> | 
-      <button class="btn btn-danger">Delete All Recipe</button>
+      <button class="btn btn-success" (click)="addNew()">New Recipe</button> |
+      <button class="btn btn-danger" (click)="deleteAllRecipe()">Delete All Recipe</button>
     </div>
   </div>
   <hr />
   <div class="row">
-    <div class="col-md-6">
-      <app-recipe-list></app-recipe-list>
+    <div class="col-md-5">
+      <app-recipe-list
+        *ngFor="let recipe of recipes; let i = index"
+        [recipe]="recipe"
+        (click)="onLoadRecipeDetails(recipe, i)"
+      ></app-recipe-list>
     </div>
-    <div class="col-md-6">
-      <app-recipe-details></app-recipe-details>
+    <div class="col-md-7">
+      <app-recipe-details
+        [selectedRecipe]="selectedRecipe"
+        *ngIf="selectedRecipe"
+        (editRecipe)="editRecipe()"
+      ></app-recipe-details>
     </div>
   </div>
 </div>
+

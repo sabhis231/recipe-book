@@ -13,7 +13,7 @@ const initialState: State = {
   error: null,
 };
 
-export function AuthReducer(
+export function authReducer(
   state = initialState,
   action: authAction.AuthActionsType
 ) {

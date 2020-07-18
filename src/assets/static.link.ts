@@ -4,3 +4,5 @@ export const signInApi =
   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
 export const shoppingListAPIBaseUrl =
   'https://recipe-book-8e7a7.firebaseio.com/shopping-list';
+export const recipeAPIBaseUrl =
+  'https://recipe-book-8e7a7.firebaseio.com/recipe';
